@@ -5,3 +5,6 @@ django.json
 
 # Tests cache
 .cache
+
+# Generated static files
+staticfiles/
