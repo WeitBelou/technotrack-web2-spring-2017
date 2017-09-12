@@ -24,7 +24,7 @@ class Config:
 
     @property
     def secret(self) -> str:
-        return self._get('DJANGO_SECRET')
+        return self._get('DJANGO_SECRET_KEY')
 
     @property
     def db_url(self) -> str:
