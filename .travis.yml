@@ -12,9 +12,5 @@ deploy:
   api_key: ${HEROKU_API_KEY}
   app: technotrack-rettiwt
 
-  run:
-    - "./migrate.py migrate"
-    - restart
-
   on:
     branch: master
