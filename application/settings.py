@@ -15,6 +15,9 @@ DEBUG = config.debug
 
 ALLOWED_HOSTS = []
 
+if not DEBUG:
+    ALLOWED_HOSTS = ['technotrack-rettiwt.herokuapp.com']
+
 # Application definition
 
 INSTALLED_APPS = [

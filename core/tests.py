@@ -1,3 +1,3 @@
-from django.test import TestCase
-
-# Create your tests here.
+# TODO: Remove when new tests will be added
+def test_empty():
+    pass

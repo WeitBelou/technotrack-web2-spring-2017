@@ -2,3 +2,6 @@
 
 # Config
 django.json
+
+# Tests cache
+.cache

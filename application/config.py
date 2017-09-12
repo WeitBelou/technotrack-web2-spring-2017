@@ -1,5 +1,7 @@
 import json
-from os import environ
+import os
+
+from typing import Union
 
 
 class Config:
@@ -7,16 +9,18 @@ class Config:
         """
         Initialize config from json file.
         """
-        with open(path) as config_file:
-            self._config = json.load(config_file)
+        self._config = dict()
+        if os.path.exists(path):
+            with open(path) as config_file:
+                self._config = json.load(config_file)
 
-    def _get(self, key: str) -> [str, bool]:
+    def _get(self, key: str, default=None) -> Union[str, bool]:
         """
         Returns var from environment or, if not present, from config.
 
         If not present in both returns None.
         """
-        return environ.get(key, self._config.get(key))
+        return os.environ.get(key, self._config.get(key, default))
 
     @property
     def secret(self) -> str:
@@ -28,4 +32,4 @@ class Config:
 
     @property
     def debug(self) -> bool:
-        return self._get('DEBUG')
+        return self._get('DEBUG', False)
