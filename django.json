@@ -1,8 +1,5 @@
 {
-  "secret": "4=z#--v#5b^g+*hg=l-g)3*irn#_u8ghi-(=vy5v0tr2gznh$s",
-  "db": {
-    "name": "web_2",
-    "user": "web_2",
-    "password": "web_2"
-  }
+  "DJANGO_SECRET": "4=z#--v#5b^g+*hg=l-g)3*irn#_u8ghi-(=vy5v0tr2gznh$s",
+  "DATABASE_URL": "postgres://web_2:web_2@localhost:5432/web_2",
+  "DEBUG": true
 }

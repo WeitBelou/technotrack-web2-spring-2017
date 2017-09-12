@@ -1,17 +1,17 @@
-import json
 import os
+
+import dj_database_url
+
+from application.config import Config
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-with open(os.path.join(BASE_DIR, 'django.json')) as config_file:
-    config = json.load(config_file)
+config = Config(os.path.join(BASE_DIR, 'django.json'))
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = config['secret']
+SECRET_KEY = config.secret
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = config.debug
 
 ALLOWED_HOSTS = []
 
@@ -65,13 +65,7 @@ WSGI_APPLICATION = 'application.wsgi.application'
 
 # Database
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': config['db']['name'],
-        'USER': config['db']['user'],
-        'PASSWORD': config['db']['password'],
-        'HOST': 'localhost',
-    }
+    'default': dj_database_url.config(default=config.db_url)
 }
 
 # Password validation
