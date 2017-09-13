@@ -8,6 +8,7 @@ service:
 
 before_script:
   - psql -c 'create database test;' -U postgres
+  - ./manage.py migrate
 
 env:
   - DATABASE_URL="postgres://postgres:@localhost:5432/test"
