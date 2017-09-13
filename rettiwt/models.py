@@ -5,13 +5,6 @@ from django.db import models
 from core.models import WithDates, WithAuthor
 
 
-class Post(WithDates, WithAuthor):
-    """
-    Model for 'posts'.
-    """
-    text = models.TextField(max_length=300)
-
-
 class Like(WithDates, WithAuthor):
     """
     Model for 'likes'.
@@ -26,8 +19,14 @@ class Likable(models.Model):
     """
     Helper to represent objects on which we can set like.
     """
-    likes = models.ManyToManyField(Like)
-    likes_count = models.PositiveIntegerField()
+    likes_count = models.PositiveIntegerField(default=0)
 
     class Meta:
         abstract = True
+
+
+class Post(WithDates, WithAuthor, Likable):
+    """
+    Model for 'posts'.
+    """
+    text = models.TextField(max_length=300)

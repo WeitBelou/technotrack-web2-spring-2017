@@ -29,7 +29,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'debug_toolbar',
     'core.apps.CoreConfig',
-    'rettiwt'
+    'rettiwt.apps.RettiwtConfig'
 ]
 
 MIDDLEWARE = [
