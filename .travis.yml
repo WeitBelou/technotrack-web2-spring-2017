@@ -3,6 +3,12 @@ language: python
 python:
   - 3.6.2
 
+service:
+  - postgresql
+
+before_script:
+  - psql -c 'create database test_web_2;' -U postgres
+
 script:
   - pytest
 
