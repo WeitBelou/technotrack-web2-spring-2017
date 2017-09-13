@@ -2,7 +2,7 @@ import pytest
 from django.db import IntegrityError
 
 from core.models import User
-from rettiwt.models import Post
+from rettiwt.models import Post, Likable
 
 
 def test_post_model_save():
@@ -27,3 +27,10 @@ def test_post_save_without_author():
 
     with pytest.raises(IntegrityError):
         p.save()
+
+
+def test_likable():
+    likable = Likable()
+
+    with pytest.raises(AttributeError):
+        likable.save()
