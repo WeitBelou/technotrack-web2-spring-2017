@@ -17,5 +17,7 @@ def test_user_model_save():
     """
     Tests that we can save user model.
     """
-    w = User()
-    w.save()
+    u = User()
+    u.save()
+
+    assert u == User.objects.first()

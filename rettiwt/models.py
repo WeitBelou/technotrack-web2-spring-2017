@@ -1,3 +1,7 @@
 from django.db import models
 
-# Create your models here.
+from core.models import WithDates
+
+
+class Post(WithDates):
+    text = models.TextField(max_length=300)

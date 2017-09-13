@@ -1,3 +1,9 @@
 from django.contrib import admin
+from django.contrib.admin import ModelAdmin
 
-# Register your models here.
+from rettiwt.models import Post
+
+
+@admin.register(Post)
+class AdminPost(ModelAdmin):
+    pass
