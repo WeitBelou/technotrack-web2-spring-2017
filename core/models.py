@@ -8,6 +8,9 @@ class User(AbstractUser):
     relationships = models.ManyToManyField(to='self', through='Relationship',
                                            symmetrical=False, related_name='related_to')
 
+    def __str__(self):
+        return self.username
+
 
 class Relationship(models.Model):
     from_user = models.ForeignKey(User, related_name='from_users')
