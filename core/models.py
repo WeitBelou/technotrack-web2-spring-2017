@@ -5,7 +5,7 @@ from django.db import models
 
 
 class User(AbstractUser):
-    pass
+    followers = models.ManyToManyField(to='User', related_name='follows')
 
 
 class WithDates(models.Model):
