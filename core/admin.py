@@ -12,4 +12,6 @@ class RelationshipInline(admin.StackedInline):
 
 @admin.register(User)
 class UserAdmin(BaseUserAdmin):
-    inlines = (RelationshipInline,)
+    inlines = [
+        RelationshipInline,
+    ]
