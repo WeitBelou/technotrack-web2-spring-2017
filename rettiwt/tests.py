@@ -2,7 +2,7 @@ import pytest
 from django.db import IntegrityError
 
 from core.models import User
-from rettiwt.models import Post, Likable, Like
+from rettiwt.models import Post, Likable, Like, Commentable, Comment
 
 
 def test_post_model_save():
@@ -50,3 +50,26 @@ def test_post_like():
     like.save()
 
     assert post.likes_count == 1, 'Likes count did not change.'
+
+
+def test_commentable():
+    commentable = Commentable()
+
+    with pytest.raises(AttributeError):
+        commentable.save()
+
+
+def test_post_comment():
+    post_author = User(username='one')
+    post_author.save()
+
+    comment_author = User(username='two')
+    comment_author.save()
+
+    post = Post(author_id=post_author.id, text='Sunt lunaes tractare magnum, secundus fiscinaes.')
+    post.save()
+
+    comment = Comment(author_id=comment_author.id, object=post, text='Xiphiass experimentum in cella!')
+    comment.save()
+
+    assert post.comments_count == 1, 'Comments count did not change.'

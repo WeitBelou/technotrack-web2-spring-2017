@@ -25,7 +25,29 @@ class Likable(models.Model):
         abstract = True
 
 
-class Post(WithDates, WithAuthor, Likable):
+class Comment(WithDates, WithAuthor, Likable):
+    """
+    Model for 'comments'
+    """
+    text = models.TextField(max_length=300)
+
+    object_id = models.PositiveIntegerField()
+    content_type = models.ForeignKey(ContentType)
+
+    object = GenericForeignKey()
+
+
+class Commentable(models.Model):
+    """
+    Helper to represent objects which you can comment
+    """
+    comments_count = models.PositiveIntegerField(default=0)
+
+    class Meta:
+        abstract = True
+
+
+class Post(WithDates, WithAuthor, Likable, Commentable):
     """
     Model for 'posts'.
     """
