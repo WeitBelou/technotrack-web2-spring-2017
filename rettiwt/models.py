@@ -1,18 +1,12 @@
-from django.contrib.contenttypes.fields import GenericForeignKey
-from django.contrib.contenttypes.models import ContentType
 from django.db import models
 
-from core.models import WithDates, WithAuthor, WithDatesAndAuthor
+from core.models import WithDates, WithAuthor, WithDatesAndAuthor, WithGenericKey
 
 
-class Like(WithDatesAndAuthor):
+class Like(WithDatesAndAuthor, WithGenericKey):
     """
     Model for 'likes'.
     """
-    object_id = models.PositiveIntegerField()
-    content_type = models.ForeignKey(ContentType)
-
-    object = GenericForeignKey()
 
 
 class Likable(models.Model):
@@ -25,16 +19,11 @@ class Likable(models.Model):
         abstract = True
 
 
-class Comment(WithDatesAndAuthor, Likable):
+class Comment(WithDatesAndAuthor, WithGenericKey, Likable):
     """
     Model for 'comments'
     """
     text = models.TextField(max_length=300)
-
-    object_id = models.PositiveIntegerField()
-    content_type = models.ForeignKey(ContentType)
-
-    object = GenericForeignKey()
 
 
 class Commentable(models.Model):
