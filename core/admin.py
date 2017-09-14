@@ -7,6 +7,7 @@ from .models import User, Relationship
 class RelationshipInline(admin.StackedInline):
     model = Relationship
     fk_name = 'from_user'
+    extra = 0
 
 
 @admin.register(User)

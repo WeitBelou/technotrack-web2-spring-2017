@@ -7,10 +7,12 @@ from rettiwt.models import Post, Like, Comment
 
 class LikesInline(GenericStackedInline):
     model = Like
+    extra = 0
 
 
 class CommentsInline(GenericStackedInline):
     model = Comment
+    extra = 0
 
 
 @admin.register(Post)
