@@ -2,10 +2,10 @@ from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
 from django.db import models
 
-from core.models import WithDates, WithAuthor
+from core.models import WithDates, WithAuthor, WithDatesAndAuthor
 
 
-class Like(WithDates, WithAuthor):
+class Like(WithDatesAndAuthor):
     """
     Model for 'likes'.
     """
@@ -25,7 +25,7 @@ class Likable(models.Model):
         abstract = True
 
 
-class Comment(WithDates, WithAuthor, Likable):
+class Comment(WithDatesAndAuthor, Likable):
     """
     Model for 'comments'
     """
@@ -47,7 +47,7 @@ class Commentable(models.Model):
         abstract = True
 
 
-class Post(WithDates, WithAuthor, Likable, Commentable):
+class Post(WithDatesAndAuthor, Likable, Commentable):
     """
     Model for 'posts'.
     """

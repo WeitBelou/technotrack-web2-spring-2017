@@ -19,3 +19,8 @@ class WithAuthor(models.Model):
 
     class Meta:
         abstract = True
+
+
+class WithDatesAndAuthor(WithDates, WithAuthor):
+    class Meta:
+        abstract = True
