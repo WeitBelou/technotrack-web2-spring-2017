@@ -5,7 +5,13 @@ from django.db import models
 
 
 class User(AbstractUser):
-    followers = models.ManyToManyField(to='User', related_name='follows')
+    relationships = models.ManyToManyField(to='self', through='Relationship',
+                                           symmetrical=False, related_name='related_to')
+
+
+class Relationship(models.Model):
+    from_user = models.ForeignKey(User, related_name='from_users')
+    to_user = models.ForeignKey(User, related_name='to_users')
 
 
 class WithDates(models.Model):
