@@ -11,7 +11,7 @@ class AdminPost(ModelAdmin):
 
 @admin.register(Comment)
 class AdminComment(ModelAdmin):
-    readonly_fields = ('likes_count', )
+    readonly_fields = ('comments_count', 'likes_count',)
 
 
 @admin.register(Like)
