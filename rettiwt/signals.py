@@ -1,7 +1,7 @@
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
-from core.models import User, Event
+from core.models import User, Event, UserEvent
 from rettiwt.models import Like, Comment, FeedEvent
 
 
@@ -32,10 +32,13 @@ def notify_users(instance: FeedEvent, created=False, *args, **kwargs):
     Signal that adds events to users feed
     """
     if created:
-        users = instance.author.relationships.values_list()
         title = instance.get_title()
+        event = Event(title=title)
+        event.save()
+
+        users = instance.author.relationships.get_queryset()
         for user in users:
-            Event(user=user, title=title).save()
+            UserEvent(user=user, event=event).save()
 
 
 for model in FeedEvent.__subclasses__():

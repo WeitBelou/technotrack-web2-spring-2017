@@ -7,11 +7,14 @@ from django.db import models
 class Event(models.Model):
     title = models.CharField(max_length=255)
 
+    def __str__(self) -> str:
+        return self.title
+
 
 class User(AbstractUser):
     relationships = models.ManyToManyField(to='self', through='Relationship',
                                            symmetrical=False, related_name='related_to')
-    feed = models.ManyToManyField(to=Event, related_name='user')
+    feed = models.ManyToManyField(to=Event, through='UserEvent', related_name='users')
 
     def __str__(self):
         return self.username
@@ -20,6 +23,11 @@ class User(AbstractUser):
 class Relationship(models.Model):
     from_user = models.ForeignKey(User, related_name='from_users')
     to_user = models.ForeignKey(User, related_name='to_users')
+
+
+class UserEvent(models.Model):
+    user = models.ForeignKey(User, related_name='user')
+    event = models.ForeignKey(Event, related_name='event')
 
 
 class WithDates(models.Model):
