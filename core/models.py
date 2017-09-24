@@ -4,9 +4,14 @@ from django.contrib.contenttypes.models import ContentType
 from django.db import models
 
 
+class Event(models.Model):
+    title = models.CharField(max_length=255)
+
+
 class User(AbstractUser):
     relationships = models.ManyToManyField(to='self', through='Relationship',
                                            symmetrical=False, related_name='related_to')
+    feed = models.ManyToManyField(to=Event, related_name='user')
 
     def __str__(self):
         return self.username

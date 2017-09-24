@@ -1,7 +1,8 @@
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
-from rettiwt.models import Like, Comment
+from core.models import User, Event
+from rettiwt.models import Like, Comment, FeedEvent
 
 
 @receiver(post_save, sender=Like)
@@ -24,3 +25,18 @@ def increment_comments_count(instance: Comment, created=False, *args, **kwargs):
         commentable = instance.object
         commentable.comments_count += 1
         commentable.save()
+
+
+def notify_users(instance: FeedEvent, created=False, *args, **kwargs):
+    """
+    Signal that adds events to users feed
+    """
+    if created:
+        users = instance.author.relationships.values_list()
+        title = instance.get_title()
+        for user in users:
+            Event(user=user, title=title).save()
+
+
+for model in FeedEvent.__subclasses__():
+    post_save.connect(notify_users, model)
